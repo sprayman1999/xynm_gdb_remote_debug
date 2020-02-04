@@ -3,6 +3,7 @@
 一般适用于docker中pwn编写。
 exp文件附上以下代码:
 ```
+gdb_attach_remote_port = 55667
 def debug_remote(pid,gdb_script = []):
     global gdb_attach_remote_port
     sh = remote("127.0.0.1",gdb_attach_remote_port)
