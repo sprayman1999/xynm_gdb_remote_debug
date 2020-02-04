@@ -54,15 +54,14 @@ def gdb_attach_func(sh):
     context.log_level = "CRITICAL"
     gdb_process = process(["gdb"],shell=True)
     gdb_process.sendline("attach %s"%pid)
-    sleep(0.2)
-    sh.send("Done")
-    sh.close()
     gdb_process.recvuntil("pwndbg>")
     for i in gdb_script_list:
         gdb_process.sendline(i)
         print "\n%s"%gdb_process.recvuntil("pwndbg> "),
         print gdb_process.recv()
     #gdb_process.interactive(prompt="")
+    sh.send("Done")
+    sh.close()
     prompt = ''
     go = threading.Event()
     def recv_thread():
